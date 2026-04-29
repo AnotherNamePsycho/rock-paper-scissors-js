@@ -13,3 +13,8 @@ function getComputerChoice(){
         return 'scissors';
     }
 }
+
+// return player input string
+function getHumanChoice(){
+    return prompt('Input your choice');
+}
