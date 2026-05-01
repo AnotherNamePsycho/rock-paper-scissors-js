@@ -25,33 +25,30 @@ let computerScore = 0;
 //get input from player and generate computer move
 //show who win the round and add one point to their score
 function playRound(humanChoice,computerChoice){
-    const _computerChoice = computerChoice();
-    const _humanChoice = humanChoice().toLowerCase();
-
+    humanChoice = humanChoice.toLowerCase();
     let isWin = false;
 
-    if(_humanChoice == 'rock' && _computerChoice == 'scissors'){
+    if(humanChoice == 'rock' && computerChoice == 'scissors'){
         isWin = true;
     }
-    else if (_humanChoice == 'paper' && _computerChoice == 'rock'){
+    else if (humanChoice == 'paper' && computerChoice == 'rock'){
         isWin = true;
     }
-    else if (_humanChoice == 'scissors' && _computerChoice == 'paper'){
+    else if (humanChoice == 'scissors' && computerChoice == 'paper'){
         isWin = true;
     }
 
    
     if(isWin){
-        console.log(`You win! ${_humanChoice} beats ${_computerChoice}.`);
+        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
         humanScore++;
     }
-    else if(!isWin && _humanChoice == _computerChoice){
-        console.log(`Tie! You both pick ${_humanChoice}.`);
+    else if(!isWin && humanChoice == computerChoice){
+        console.log(`Tie! You both pick ${humanChoice}.`);
     }
     else{
-        console.log(`You lose! ${_computerChoice} beats ${_humanChoice}.`);
+        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
         computerScore++;
     }
    
 }
-
