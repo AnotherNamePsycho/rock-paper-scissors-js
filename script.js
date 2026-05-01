@@ -40,17 +40,18 @@ function playRound(humanChoice,computerChoice){
         isWin = true;
     }
 
-    if(isWin && _humanChoice == _computerChoice){
-        console.log("Tie!");
-    }
-    else if(isWin){
+   
+    if(isWin){
         console.log(`You win! ${_humanChoice} beats ${_computerChoice}`);
         humanScore++;
+    }
+    else if(!isWin && _humanChoice == _computerChoice){
+        console.log("Tie!");
     }
     else{
         console.log(`You lose! ${_computerChoice} beats ${_humanChoice}`);
         computerScore++;
     }
-
+   
 }
 
