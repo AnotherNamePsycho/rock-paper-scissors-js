@@ -56,4 +56,27 @@ function initButtonListener(){
     });
 }
 
+function initRoundInfoElement(){
+    const roundInfo = document.querySelector("#round-info");
+    const info = document.createElement("p");
+    info.textContent = `info:`;
+    roundInfo.appendChild(info);
+}
+
+function initScoreCounterElement(){
+    const scoreCounter = document.querySelector("#score-counter");
+    
+    const humanScoreText = document.createElement("p");
+    humanScoreText.classList.add("human-score")
+    humanScoreText.textContent = `Human: ${humanScore}`;
+    scoreCounter.appendChild(humanScoreText);   
+
+    const computerScoreText = document.createElement("p");
+    computerScoreText.classList.add("computer-score")
+    computerScoreText.textContent = `Computer: ${computerScore}`;
+    scoreCounter.appendChild(computerScoreText);
+}
+
 initButtonListener();
+initRoundInfoElement();
+initScoreCounterElement();

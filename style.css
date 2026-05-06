@@ -1,0 +1,10 @@
+#score-counter p{
+    margin: 0px;
+}
+
+.human-score{
+    color: blue;
+}
+.computer-score{
+    color: red;
+}
