@@ -98,7 +98,7 @@ function initButton(){
         computerChoice = null;
         resetUI();
     });
-    document.body.appendChild(playAgainButton);
+
 }
 
 
@@ -254,7 +254,6 @@ function init(){
     });
 
     document.addEventListener("game-end",() => {
-        updateRoundUI();
         updateEndgameUI();
     });
 }
