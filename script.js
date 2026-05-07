@@ -76,8 +76,8 @@ function playRound(){
 }
 
 
-function initButtonListener(){
-    let buttonList = Array.from(document.querySelectorAll("button"));
+function initButton(){
+    let buttonList = Array.from(document.querySelectorAll(".choice-button"));
 
     buttonList.forEach((button) => {
         button.addEventListener("click",(e) => {
@@ -86,6 +86,19 @@ function initButtonListener(){
             playRound();
         })
     });
+
+    const playAgainButton = document.querySelector("#play-again-button");
+    playAgainButton.hidden = true;
+    
+    playAgainButton.addEventListener("click",() => {
+        humanScore = 0;
+        computerScore = 0;
+
+        humanChoice = null;
+        computerChoice = null;
+        resetUI();
+    });
+    document.body.appendChild(playAgainButton);
 }
 
 
@@ -159,6 +172,41 @@ function updateRoundUI(){
 
 }
 
+function resetUI(){
+    let buttonList = Array.from(document.querySelectorAll(".choice-button"));
+    buttonList.forEach((button) => {
+        button.disabled = false;
+    });
+
+    let roundInfoElements = Array.from(document.querySelector("#round-info").children);
+    roundInfoElements.forEach((element) =>  {
+
+        if(element.getAttribute("class") || element.getAttribute("id"))
+        {
+            element.remove();
+        }
+    });
+    
+    let scoreCounterElements = Array.from(document.querySelector("#score-counter").children);
+    scoreCounterElements.forEach((element) =>  {
+
+        if(element.getAttribute("class") || element.getAttribute("id"))
+        {
+            element.remove();
+        }
+    });
+
+    const gameWinner = document.querySelector("#game-winner span");
+    gameWinner.classList.remove(gameWinner.classList);
+    gameWinner.textContent = "";
+
+    const playAgainButton = document.querySelector("#play-again-button");
+    playAgainButton.hidden = true;
+
+    initRoundInfoElement();
+    initScoreCounterElement();
+}
+
 function checkGameWinner(){
     if(humanScore >= 5){
         return "human";
@@ -168,6 +216,7 @@ function checkGameWinner(){
     }
 }
 
+//show winner and disable button
 function updateEndgameUI(){
     const winner = checkGameWinner(); 
     if(winner != undefined){
@@ -184,16 +233,19 @@ function updateEndgameUI(){
                 break;
         }
     }
-    console.log('s');
-    const buttonList = Array.from(document.querySelectorAll("button"));
+
+    const buttonList = Array.from(document.querySelectorAll(".choice-button"));
 
     buttonList.forEach((button) => {
         button.disabled = true;
     });
+
+    const playAgainButton = document.querySelector("#play-again-button");
+    playAgainButton.hidden = false;
 }
 
 function init(){
-    initButtonListener();
+    initButton();
     initRoundInfoElement();
     initScoreCounterElement();
     
