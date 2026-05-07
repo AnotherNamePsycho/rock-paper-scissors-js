@@ -119,11 +119,29 @@ function initScoreCounterElement(){
 function updateUI(){
     const humanInfo = document.querySelector("#round-info .human-color");
     const computerInfo = document.querySelector("#round-info .computer-color");
-    const roundWinner = document.querySelector("#round-winner");
+    const roundWinnerText = document.querySelector("#round-winner");
 
     humanInfo.textContent = `Human: ${humanChoice}`;
     computerInfo.textContent = `Computer: ${computerChoice}`;
     
+
+    roundWinnerText.className = '';
+    
+    const roundWinner = checkRoundWinner();
+    switch(roundWinner){
+        case "human":
+            roundWinnerText.classList.add("win-color");
+            roundWinnerText.textContent = "Human Win";
+            break;
+        case "computer":
+            roundWinnerText.classList.add("lose-color");
+            roundWinnerText.textContent = "Computer Win";
+            break;
+        case "none":
+            roundWinnerText.classList.add("tie-color");
+            roundWinnerText.textContent = "Tie";
+            break;
+    }
 
     const humanScoreText = document.querySelector("#score-counter .human-color");
     const computerScoreText = document.querySelector("#score-counter .computer-color");

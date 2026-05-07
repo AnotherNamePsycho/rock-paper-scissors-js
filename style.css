@@ -13,3 +13,12 @@
     color: red;
 }
 
+.win-color{
+    color: green;
+}
+.lose-color{
+    color:red;
+}
+.tie-color{
+    color: grey;
+}
