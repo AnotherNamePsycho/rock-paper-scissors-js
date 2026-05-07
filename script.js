@@ -4,13 +4,13 @@ function getComputerChoice(){
     const choice = Math.floor(Math.random() * 3);
 
     if(choice == 0){
-        return 'rock';
+        return 'Rock';
     }
     else if(choice == 1){
-        return 'paper';
+        return 'Paper';
     }
     else if(choice == 2){
-        return 'scissors';
+        return 'Scissors';
     }
 }
 
@@ -20,31 +20,48 @@ let computerScore = 0;
 let humanChoice;
 let computerChoice;
 
-//find winner and add score
-function playRound(humanChoice,computerChoice){
-
-    humanChoice = humanChoice.toLowerCase();
-    let isWin = false;
-    if(humanChoice == 'rock' && computerChoice == 'scissors'){
-        isWin = true;
+function checkRoundWinner(){
+    let isHumanWin = false;
+    
+    if(humanChoice == 'Rock' && computerChoice == 'Scissors'){
+        isHumanWin = true;
     }
-    else if (humanChoice == 'paper' && computerChoice == 'rock'){
-        isWin = true;
+    else if (humanChoice == 'Paper' && computerChoice == 'Rock'){
+        isHumanWin = true;
     }
-    else if (humanChoice == 'scissors' && computerChoice == 'paper'){
-        isWin = true;
+    else if (humanChoice == 'Scissors' && computerChoice == 'Paper'){
+        isHumanWin = true;
     }
 
-    if(isWin){
-        console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
-        humanScore++;
+    if(isHumanWin){
+        return 'human';
     }
-    else if(!isWin && humanChoice == computerChoice){
-        console.log(`Tie! You both pick ${humanChoice}.`);
+    else if(!isHumanWin && humanChoice === computerChoice){
+        return 'none';
     }
     else{
-        console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
-        computerScore++;
+        return 'computer';
+    }
+
+}
+
+
+function playRound(){
+
+    let roundWinner = checkRoundWinner();
+    
+    switch(roundWinner){
+        case "human":
+            console.log(`You win! ${humanChoice} beats ${computerChoice}.`);
+            humanScore++;
+            break;
+        case "computer":
+            console.log(`You lose! ${computerChoice} beats ${humanChoice}.`);
+            computerScore++;
+            break;
+        case "none":
+            console.log(`Tie! You both pick ${humanChoice}.`);
+            break; 
     }
     
     let event = new Event("round-end");
@@ -59,7 +76,7 @@ function initButtonListener(){
         button.addEventListener("click",(e) => {
             humanChoice = e.target.textContent;
             computerChoice = getComputerChoice();
-            playRound(humanChoice,computerChoice);
+            playRound();
         })
     });
 }
