@@ -5,6 +5,9 @@
     margin: 0px;
 }
 
+button{
+    margin-bottom: 1.5em;
+}
 
 .human-color{
     color: blue;
