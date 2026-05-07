@@ -1,10 +1,15 @@
-#score-counter p{
+#score-counter p,
+#score-counter h2,
+#round-info p,
+#round-info h2{
     margin: 0px;
 }
 
-.human-score{
+
+.human-color{
     color: blue;
 }
-.computer-score{
+.computer-color{
     color: red;
 }
+
