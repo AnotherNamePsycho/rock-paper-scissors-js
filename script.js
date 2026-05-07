@@ -64,8 +64,15 @@ function playRound(){
             break; 
     }
     
-    let event = new Event("round-end");
+    let event ;
+    event = new Event("round-end");
     document.dispatchEvent(event);
+
+    if(checkGameWinner() != undefined){
+        event = new Event("game-end");
+        document.dispatchEvent(event);
+    }
+    
 }
 
 
@@ -116,7 +123,8 @@ function initScoreCounterElement(){
 }
 
 
-function updateUI(){
+
+function updateRoundUI(){
     const humanInfo = document.querySelector("#round-info .human-color");
     const computerInfo = document.querySelector("#round-info .computer-color");
     const roundWinnerText = document.querySelector("#round-winner");
@@ -148,8 +156,41 @@ function updateUI(){
     
     humanScoreText.textContent = `Human: ${humanScore}`;
     computerScoreText.textContent = `Computer: ${computerScore}`;
+
 }
 
+function checkGameWinner(){
+    if(humanScore >= 5){
+        return "human";
+    }
+    else if(computerScore >= 5){
+        return "computer";
+    }
+}
+
+function updateEndgameUI(){
+    const winner = checkGameWinner(); 
+    if(winner != undefined){
+        const gameWinner = document.querySelector("#game-winner span");
+        
+        switch(winner){
+            case "human":
+                gameWinner.classList.add("win-color");
+                gameWinner.textContent = "Human";
+                break;
+            case "computer":
+                gameWinner.classList.add("lose-color");
+                gameWinner.textContent = "Computer";
+                break;
+        }
+    }
+    console.log('s');
+    const buttonList = Array.from(document.querySelectorAll("button"));
+
+    buttonList.forEach((button) => {
+        button.disabled = true;
+    });
+}
 
 function init(){
     initButtonListener();
@@ -157,7 +198,12 @@ function init(){
     initScoreCounterElement();
     
     document.addEventListener("round-end",() => {
-        updateUI();
+        updateRoundUI();
+    });
+
+    document.addEventListener("game-end",() => {
+        updateRoundUI();
+        updateEndgameUI();
     });
 }
 
